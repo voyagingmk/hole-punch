@@ -151,7 +151,7 @@ int main(int argc, char **argv) {
     }
 
     for ( ; iter < real_passes; iter++) {
-        sleep(10);
+        usleep(100);
         if (iter % 2 == 0) {
             uint32_t pass_buf;
             /* Keep Valgrind happy */
