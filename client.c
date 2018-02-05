@@ -150,7 +150,8 @@ int main(int argc, char **argv) {
     }
 
     for ( ; iter < real_passes; iter++) {
-       // if (iter % 2 == 0) {
+        sleep(10);
+        if (iter % 2 == 0) {
             uint32_t pass_buf;
             /* Keep Valgrind happy */
             pass_buf = 0;
@@ -176,10 +177,10 @@ int main(int argc, char **argv) {
 
             remote_set = 1;
             printf("Received '%u'\n", ntohl(pass_buf));
-      //  } else {
+        } else {
             /* Send the current iteration number */
             assert(remote_set);
-             pass_buf = htonl((uint32_t) iter / 2);
+            uint32_t pass_buf = htonl((uint32_t) iter / 2);
 
             sendret = sendto(fd, &pass_buf, sizeof(pass_buf), 0, &remote,
                 sizeof(remote));
@@ -187,7 +188,7 @@ int main(int argc, char **argv) {
                 fprintf(stderr, "Error on sendto. errno %d\n", errno);
                 return 10;
             }
-     //   }
+        }
     }
 
     return 0;
